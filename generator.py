@@ -44,7 +44,7 @@ def genAbstract(charSet):
 
 def genLower():
     global reqNumLowerCase
-    print('genLower')
+    # print('genLower')
 
     myStr = ''
 
@@ -56,7 +56,7 @@ def genLower():
 
 def genUpper():
     global reqNumUpperCase
-    print('genUpper')
+    # print('genUpper')
     myStr = ''
 
     if reqNumUpperCase > 0:
@@ -68,7 +68,7 @@ def genUpper():
 
 def genNumber():
     global reqNumNums
-    print('genNumber')
+    # print('genNumber')
 
     myStr = ''
 
@@ -80,7 +80,7 @@ def genNumber():
 
 def genSpecial():
     global reqNumSpecialChars
-    print('genSpecial')
+    # print('genSpecial')
 
     myStr = ''
 
@@ -111,14 +111,17 @@ def passwordGenerator(password=''):
 
     if reqNumUpperCase <= 0 and reqNumLowerCase <= 0 and reqNumSpecialChars <= 0 and reqNumNums <= 0:
 
-        print(password)
+        print('Here is your random password:', password)
         return password
 
-    print([reqNumUpperCase, reqNumLowerCase, reqNumSpecialChars, reqNumNums])
+    # print([reqNumUpperCase, reqNumLowerCase, reqNumSpecialChars, reqNumNums])
     passwordGenerator(password)
 
 
 # While statement to collect user input with a try and except clause to handle incorrect inputs
+
+
+
 def getConfig(callback):
 
     global reqNumSpecialChars, reqNumNums, reqNumUpperCase, reqNumLowerCase
@@ -134,7 +137,7 @@ def getConfig(callback):
 
         if reqNumLowerCase < 0:
             try:
-                reqNumLowerCase = int(input('How m any lower case characters are required: \n'))
+                reqNumLowerCase = int(input('How many lower case characters are required: \n'))
             except ValueError:
                 print('Please enter a number!')
                 continue
