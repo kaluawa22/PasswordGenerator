@@ -4,6 +4,7 @@
 # use Char code
 import secrets
 from enum import Enum
+from datetime import datetime
 
 class charType(Enum):
     LOWER = 0
@@ -22,12 +23,6 @@ reqNumUpperCase = -1
 reqNumLowerCase = -1
 reqNumNums = -1
 reqNumSpecialChars = -1
-
-# I originally was gonna use if else statements and Booleans to do error checking, might still need it
-upperCaseCheck = False
-lowerCaseCheck = False
-specialCharactersCheck = False
-numbersCheck = False
 
 
 # Function to generate a random password from the given the specifications
@@ -95,7 +90,11 @@ def passwordGenerator(password=''):
     global reqNumSpecialChars, reqNumNums, reqNumUpperCase, reqNumLowerCase
 
     # randomly pick a genType to generate
+    now = datetime.now()
+    today = now.strftime("at %I:%M:%S %p on %m/%d/%Y")
     genType = secrets.randbelow(4)
+    # logFile = open('log.txt', 'a')
+
 
     if genType == 0:
         password += genLower()
@@ -110,6 +109,14 @@ def passwordGenerator(password=''):
         password += genNumber()
 
     if reqNumUpperCase <= 0 and reqNumLowerCase <= 0 and reqNumSpecialChars <= 0 and reqNumNums <= 0:
+        logStatement = (password, 'generated', today)
+        with open('log.txt', 'a') as new_file:
+            logFile= map(str, logStatement)
+            new_file.write(" ".join(logFile) + "\n")
+
+        # for item in logStatement:
+        #     logFile.write(''.join(str(s) for s in item) + ' ')
+        #     logFile.write('\n')
 
         print('Here is your random password:', password)
         return password
@@ -161,4 +168,7 @@ def getConfig(callback):
     callback()
 
 
+
+
 getConfig(passwordGenerator)
+
